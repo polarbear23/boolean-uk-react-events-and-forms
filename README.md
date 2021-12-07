@@ -1,70 +1,151 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`npm install`
 
-## Available Scripts
+`npm start`
 
-In the project directory, you can run:
+## Instructions
 
-### `yarn start`
+In the sections folder you will find three sections to complete for this exercise.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You have `SignUp`, `Product` and `Booking`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The aim of the exercise is to practice handling forms with React.
 
-### `yarn test`
+Inside each section folder you will find:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- a `index.js` file for the logic of each section **write code here and then break it down into components**
+- a `components` folder with suggested components to create so you can practice props.
 
-### `yarn build`
+In the `SignUp` section you will find:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- a `template.html` that shows you an example of what your React components should create. Take note of `className` to get the styling working.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For each section you will need to:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Use `state` to store your form data
+- Use handler functions for your inputs
+- Use a `handleSubmit` for your form which will `console.log` the form data
 
-### `yarn eject`
+```
+function handleSubmit(event) {
+  event.preventDefault()
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  const userData = {
+    firstName,
+    email,
+    password,
+  }
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  console.log({ userData })
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Deliverables
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Complete each section in the order below.
 
-## Learn More
+### The `SignUp` form should have:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- An input for the first name
+- An input for the email
+- An input for the password
+- A checkbox for the terms and conditions
+- Inputs should either have a `value` or `checked` attribute
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This form you will write up from scratch and use the `template.html` to help you.
 
-### Code Splitting
+The `handleSubmit` should output something like this:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+{
+  userData: {
+    firstName: "Rico",
+    email: "rico@mail.com",
+    password: "password",
+    terms: true
+  }
+}
+```
 
-### Analyzing the Bundle Size
+### The `Product` form should have:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- An `ColorSquare` that changes with the color selection
+- Inputs should either have a `value` or `checked` attribute
 
-### Making a Progressive Web App
+This form you will write code to handle the inputs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The `handleSubmit` should output something like this:
 
-### Advanced Configuration
+```
+{
+  productData: {
+    size: "small",
+    color: "red",
+    quantity: 1,
+  }
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### The `Booking` form should have:
 
-### Deployment
+- An `ColorSquare` that changes with the color selection
+- Inputs should either have a `value` or `checked` attribute
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This form you will write code to handle the inputs.
 
-### `yarn build` fails to minify
+The `handleSubmit` should output something like this:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+{
+  productData: {
+    date: "2021-12-15T16:00",
+    roomServices: {
+      newspaper: true,
+      breakfast: false
+    },
+    spaActivities: [ "facial", "massage" ],
+  }
+}
+```
+
+The `Adivce` slip section should render:
+
+- A single random advice slip
+- A list of favourtie advice slips
+
+The `Advice` slip section should allow users to:
+
+- Fetch another advice slip using a button
+- Save and advice slip to favourites using a button
+
+Use a `console.log` in your `handleSubmit` function to view submissions.
+
+```
+function handleSubmit(event) {
+  event.preventDefault()
+
+  const userData = {
+    firstName,
+    email,
+    password,
+  }
+
+  console.log({ userData })
+}
+```
+
+## Challenges
+
+- Refactor the checkboxes in the `Booking` form into a resuable component called `CheckboxesGroup`. So you can implement something similar to below where `{...props}` is replaced with relevant props:
+
+```
+<form>
+  ...
+  <CheckboxesGroup {...props} />
+  <CheckboxesGroup {...props} />
+  ...
+</form>
+```
+
+- Build the `Product` or `Booking` form from scratch or create your own.
