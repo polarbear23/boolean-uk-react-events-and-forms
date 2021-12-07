@@ -12,6 +12,7 @@ const SignUpForm = () => {
         const inputName = event.target.name;
         const inputValue = event.target.value;
         const inputType = event.target.type;
+        const inputChecked = event.target.checked;
 
         if (inputName === "firstName") {
             setSignUpFormData({ ...signUpFormData, firstName: inputValue });
@@ -26,7 +27,7 @@ const SignUpForm = () => {
         }
 
         if (inputType === "checkbox" && inputName === "terms") {
-            setSignUpFormData({ ...signUpFormData, terms: inputValue });
+            setSignUpFormData({ ...signUpFormData, terms: inputChecked });
         }
     }
 
@@ -36,7 +37,8 @@ const SignUpForm = () => {
         const userData = {
             firstName: signUpFormData.firstName,
             email: signUpFormData.email,
-            password: signUpFormData.password
+            password: signUpFormData.password,
+            terms: signUpFormData.terms
         }
 
         console.log({ userData })
@@ -51,7 +53,7 @@ const SignUpForm = () => {
             <label for="password">Password</label>
             <input type="password" id="password" name="password" value={signUpFormData.password} onChange={handleChange} />
             <div>
-                <input type="checkbox" id="terms" name="terms" onChange={handleChange} />
+                <input type="checkbox" id="terms" name="terms" onChange={handleChange} checked={signUpFormData.terms === true} />
                 <label for="terms">I accept Terms and Conditons</label>
             </div>
             <button type="submit">Sign Up</button>

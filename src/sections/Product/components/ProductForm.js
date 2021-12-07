@@ -31,13 +31,13 @@ const ProductForm = () => {
     function handleSubmit(event) {
         event.preventDefault()
 
-        const userData = {
+        const productData = {
             size: productFormData.size,
             color: productFormData.color,
             quantity: productFormData.quantity
         }
 
-        console.log({ userData })
+        console.log({ productData })
     }
 
     return (
