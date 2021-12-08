@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from "react"
-
+import CheckboxesGroup from './CheckboxesGroup';
 const BookingForm = () => {
     const [bookingData, setBookingData] = useState({
         date: "",
         roomServices: {
-            newspaper: "",
-            breakfast: ""
+            newspaper: false,
+            breakfast: false
         },
         spaActivities: [],
 
@@ -17,40 +17,40 @@ const BookingForm = () => {
         const inputValue = event.target.value;
         const inputType = event.target.type;
         const inputChecked = event.target.checked;
-
+        let newData = {};
         if (inputType === "datetime-local") {
-            setBookingData({ ...bookingData, date: inputValue });
+            newData = { ...bookingData, date: inputValue };
         }
 
         if (inputName === "newspaper") {
-            setBookingData({
+            newData = {
                 ...bookingData, roomServices: {
                     newspaper: inputChecked,
                     breakfast: bookingData.roomServices.breakfast
 
                 }
-            });
+            };
         }
 
         if (inputName === "breakfast") {
-            setBookingData({
+            newData = {
                 ...bookingData, roomServices: {
                     newspaper: bookingData.roomServices.newspaper,
                     breakfast: inputChecked
                 }
-            });
+            };
         }
         if ((inputName === "pool" && inputChecked === true) || (inputName === "massage" && inputChecked === true) || (inputName === "facial" && inputChecked === true)) {
-            setBookingData({ ...bookingData, spaActivities: [...bookingData.spaActivities, inputName] });
+            newData = { ...bookingData, spaActivities: [...bookingData.spaActivities, inputName] };
         }
 
-        if ((inputName === "pool" && inputChecked === false) || (inputName === "facial" && inputChecked === false) || (inputName === "facial" && inputChecked === false)) {
+        if ((inputName === "pool" && inputChecked === false) || (inputName === "massage" && inputChecked === false) || (inputName === "facial" && inputChecked === false)) {
             const newArray = [...bookingData.spaActivities]
             const index = newArray.indexOf(inputName)
             newArray.splice(index, 1);
-            setBookingData({ ...bookingData, spaActivities: [...newArray] });
+            newData = { ...bookingData, spaActivities: [...newArray] };
         }
-
+        setBookingData(newData);
 
     }
 
@@ -74,22 +74,8 @@ const BookingForm = () => {
         <form className="form-stack" onSubmit={handleSubmit}>
             <label htmlFor="date">When will you be arriving?</label>
             <input type="datetime-local" onChange={handleChange} />
-            <section>
-                <h3>Spa Activities</h3>
-                <input type="checkbox" id="pool" name="pool" onChange={handleChange} />
-                <label htmlFor="pool">Soak and Swim</label>
-                <input type="checkbox" id="facial" name="facial" onChange={handleChange} />
-                <label htmlFor="facial">Facial</label>
-                <input type="checkbox" id="massage" name="massage" onChange={handleChange} />
-                <label htmlFor="massage">Massage</label>
-            </section>
-            <section>
-                <h3>Room Services</h3>
-                <input type="checkbox" id="newspaper" name="newspaper" onChange={handleChange} checked={bookingData.roomServices.newspaper} />
-                <label htmlFor="newspaper">Daily Newspaper</label>
-                <input type="checkbox" id="breakfast" name="breakfast" onChange={handleChange} checked={bookingData.roomServices.breakfast} />
-                <label htmlFor="breakfast">Breakfast</label>
-            </section>
+            <CheckboxesGroup name="spa" handleChange={handleChange} />
+            <CheckboxesGroup handleChange={handleChange} roomServices={bookingData.roomServices} />
             <button type="submit">Book</button>
         </form>
     )

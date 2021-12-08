@@ -13,19 +13,20 @@ const ProductForm = () => {
         const inputValue = event.target.value;
         const inputType = event.target.type;
         const inputId = event.target.id;
-
+        let newData = {};
         if (inputType === "radio" && inputName === "size") {
-            setProductFormData({ ...productFormData, size: inputValue });
+            newData = { ...productFormData, size: inputValue };
         }
 
         if (inputId === "color") {
-            setProductFormData({ ...productFormData, color: inputValue });
+            newData = { ...productFormData, color: inputValue };
 
         }
 
         if (inputName === "quantity") {
-            setProductFormData({ ...productFormData, quantity: inputValue });
+            newData = { ...productFormData, quantity: inputValue };
         }
+        setProductFormData(newData);
     }
 
     function handleSubmit(event) {
